@@ -1,0 +1,14 @@
+﻿using System.Data.Entity.ModelConfiguration;
+using Warehouse.DataAccess.EFHelpers;
+using Warehouse.DataAccess.Entities;
+
+namespace Warehouse.DataAccess.EntitiesConfig
+{
+    internal class AddressConfig : EntityConfigurationBase<Address>
+    {
+        public override void Configure(EntityTypeConfiguration<Address> builder)
+        {
+            builder.ToTable("Address", "dbo");
+        }
+    }
+}
