@@ -21,7 +21,10 @@ namespace Warehouse.Api.App_Start
             //------register autofac dependencies-------
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            
+            MediatorConfig.Register(builder);
+            AutomapperConfig.Register(builder);
+            WarehouseDependencies.Register(builder);                      
+
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);

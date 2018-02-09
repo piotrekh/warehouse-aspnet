@@ -19,6 +19,9 @@ namespace Warehouse.DataAccess
 
         public DbSet<Entities.Warehouse> Warehouses { get; set; }
 
+        public WarehouseDbContext() :base("WarehouseDb")
+        {
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
