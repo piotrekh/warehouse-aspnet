@@ -12,6 +12,7 @@ namespace Warehouse.Api.App_Start
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
                 );
+            config.MapHttpAttributeRoutes();
 
             //disable xml
             config.Formatters.Remove(config.Formatters.XmlFormatter);

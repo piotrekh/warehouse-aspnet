@@ -69,6 +69,7 @@
     <Compile Include="Warehouses\Commands\AddStockEvent.cs" />
     <Compile Include="Warehouses\Constants.cs" />
     <Compile Include="Warehouses\Exceptions\CannotExportStockException.cs" />
+    <Compile Include="Warehouses\Exceptions\CannotImportStockException.cs" />
     <Compile Include="Warehouses\Models\Address.cs" />
     <Compile Include="Warehouses\Models\Mapping.cs" />
     <Compile Include="Warehouses\Models\Stock.cs" />

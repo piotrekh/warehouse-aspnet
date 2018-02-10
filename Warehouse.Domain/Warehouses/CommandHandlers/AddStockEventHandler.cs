@@ -20,7 +20,7 @@ namespace Warehouse.Domain.Warehouses.CommandHandlers
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public AddStockEventHandler(WarehouseDbContext dbContext, 
+        public AddStockEventHandler(WarehouseDbContext dbContext,
             IMapper mapper,
             IMediator mediator)
         {
@@ -28,25 +28,27 @@ namespace Warehouse.Domain.Warehouses.CommandHandlers
             _mapper = mapper;
             _mediator = mediator;
         }
-        
+
         public async Task Handle(AddStockEvent message, CancellationToken cancellationToken)
         {
-            //check if we can export this amount of product or if we have space for import
             var stockForDate = await _mediator.Send(new GetWarehouseStock()
             {
                 WarehouseId = message.WarehouseId,
                 CheckDate = message.EventDate
             });
+            //check if we can export this amount of product
             if (message.EventType == EventTypes.Export)
-            {               
+            {
                 var product = stockForDate.CurrentStock.SingleOrDefault(x => x.Product.Id == message.ProductId);
                 if (product == null || product.Amount < message.ProductAmount)
                     throw new CannotExportStockException();
             }
-            else if(message.EventType == EventTypes.Import)
+            else if (message.EventType == EventTypes.Import)
             {
-                var productUnitSize = _dbContext.Products.SingleOrDefault(x => x.Id == message.ProductId).UnitSize;
-                if (stockForDate.FreeSpace < productUnitSize * message.ProductAmount)
+                //check if the warehouse accepts hazardous/non-hazardous products and if we have space for import
+                var product = _dbContext.Products.Single(x => x.Id == message.ProductId);
+                var warehouse = _dbContext.Warehouses.Single(x => x.Id == message.WarehouseId);                
+                if (product.IsHazardous != warehouse.HazardousProducts || stockForDate.FreeSpace < product.UnitSize * message.ProductAmount)
                     throw new CannotImportStockException();
             }
 
