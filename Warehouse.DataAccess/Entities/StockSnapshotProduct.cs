@@ -8,17 +8,11 @@
 
         public int ProductId { get; set; }
 
-	    public string ProductName { get; set; }
-
-        public string ProductUnit { get; set; }
-
-        public int ProductUnitSize { get; set; }
-
-	    public bool ProductIsHazardous { get; set; }
-
         public int ProductAmount { get; set; }
 
 
         public StockSnapshot Snapshot { get; set; }
+
+        public Product Product { get; set; }
     }
 }

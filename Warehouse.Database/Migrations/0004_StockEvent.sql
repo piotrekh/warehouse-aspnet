@@ -5,10 +5,6 @@
 	EventDate datetime2(0) NOT NULL,
 	WarehouseId int NOT NULL,
 	ProductId int NOT NULL,
-	ProductName nvarchar(100) NOT NULL,
-	ProductUnit nvarchar(20) NOT NULL,
-	ProductUnitSize int NOT NULL,
-	ProductIsHazardous bit NOT NULL,
 	ProductAmount int NOT NULL,
 
 	CONSTRAINT PK_StockEvent PRIMARY KEY (Id),

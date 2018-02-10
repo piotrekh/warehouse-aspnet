@@ -13,6 +13,10 @@ namespace Warehouse.DataAccess.EntitiesConfig
             builder.HasRequired(x => x.Warehouse)
                 .WithMany()
                 .HasForeignKey(x => x.WarehouseId);
+
+            builder.HasRequired(x => x.Product)
+                .WithMany()
+                .HasForeignKey(x => x.ProductId);
         }
     }
 }

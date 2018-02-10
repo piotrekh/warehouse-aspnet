@@ -9,6 +9,10 @@ namespace Warehouse.DataAccess.EntitiesConfig
         public override void Configure(EntityTypeConfiguration<StockSnapshotProduct> builder)
         {
             builder.ToTable("StockSnapshotProduct", "dbo");
+
+            builder.HasRequired(x => x.Product)
+                .WithMany()
+                .HasForeignKey(x => x.ProductId);
         }
     }
 }

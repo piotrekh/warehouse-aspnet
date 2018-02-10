@@ -14,17 +14,11 @@ namespace Warehouse.DataAccess.Entities
 
         public int ProductId { get; set; }
 
-	    public string ProductName { get; set; }
-
-        public string ProductUnit { get; set; }
-
-        public int ProductUnitSize { get; set; }
-
-	    public bool ProductIsHazardous { get; set; }
-
         public int ProductAmount { get; set; }
 
 
         public Warehouse Warehouse { get; set; }
+
+        public Product Product { get; set; }
     }
 }

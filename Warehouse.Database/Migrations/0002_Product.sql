@@ -6,5 +6,6 @@
 	UnitSize int NOT NULL,
 	IsHazardous bit NOT NULL,
 
-	CONSTRAINT PK_Product PRIMARY KEY (Id)
+	CONSTRAINT PK_Product PRIMARY KEY (Id),
+	CONSTRAINT UQ_Product UNIQUE (Name, Unit, UnitSize)
 )
