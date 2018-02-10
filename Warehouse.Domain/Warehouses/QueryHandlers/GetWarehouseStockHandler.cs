@@ -31,8 +31,8 @@ namespace Warehouse.Domain.Warehouses.QueryHandlers
             stock.CurrentStock = new List<Stock>();
             stock.MaxSize = _dbContext.Warehouses.Single(x => x.Id == request.WarehouseId).Size;
 
-            //get the most recent snapshot if any
-            Entities.StockSnapshot snapshot = _dbContext.StockSnapshots.Where(x => x.WarehouseId == request.WarehouseId)
+            //get the most recent snapshot up to the check date if any
+            Entities.StockSnapshot snapshot = _dbContext.StockSnapshots.Where(x => x.WarehouseId == request.WarehouseId && x.SnapshotDate <= request.CheckDate)
                 .Include(x => x.Products)
                 .Include("Products.Product")
                 .OrderByDescending(x => x.SnapshotDate)
@@ -42,14 +42,14 @@ namespace Warehouse.Domain.Warehouses.QueryHandlers
             if (snapshot != null && snapshot.Products != null && snapshot.Products.Any())
                 stock.CurrentStock = _mapper.Map<List<Stock>>(snapshot.Products);
 
-            //get any stock imports/exports not included in the recent snapshot
+            //get any stock imports/exports not included in the snapshot
             List<Entities.StockEvent> stockEvents = null;
             if (snapshot == null)
-                stockEvents = _dbContext.StockEvents.Where(x => x.WarehouseId == request.WarehouseId)
+                stockEvents = _dbContext.StockEvents.Where(x => x.WarehouseId == request.WarehouseId && x.EventDate <= request.CheckDate)
                     .Include(x => x.Product)
                     .ToList();
             else
-                stockEvents = _dbContext.StockEvents.Where(x => x.WarehouseId == request.WarehouseId && x.EventDate > snapshot.SnapshotDate)
+                stockEvents = _dbContext.StockEvents.Where(x => x.WarehouseId == request.WarehouseId && x.EventDate > snapshot.SnapshotDate && x.EventDate <= request.CheckDate)
                     .Include(x => x.Product)
                     .ToList();
 
