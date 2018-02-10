@@ -55,12 +55,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Models\ItemsResult.cs" />
+    <Compile Include="Products\Models\Mapping.cs" />
+    <Compile Include="Products\Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Warehouses\Constants.cs" />
     <Compile Include="Warehouses\Models\Address.cs" />
     <Compile Include="Warehouses\Models\Mapping.cs" />
+    <Compile Include="Warehouses\Models\Stock.cs" />
     <Compile Include="Warehouses\Models\WarehouseInfo.cs" />
+    <Compile Include="Warehouses\Models\WarehouseStock.cs" />
     <Compile Include="Warehouses\Queries\GetAllWarehouses.cs" />
+    <Compile Include="Warehouses\Queries\GetWarehouseStock.cs" />
     <Compile Include="Warehouses\QueryHandlers\GetAllWarehousesHandler.cs" />
+    <Compile Include="Warehouses\QueryHandlers\GetWarehouseStockHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.DataAccess\Warehouse.DataAccess.csproj">
