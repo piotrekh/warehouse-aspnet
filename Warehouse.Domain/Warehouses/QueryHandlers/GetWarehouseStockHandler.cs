@@ -83,6 +83,8 @@ namespace Warehouse.Domain.Warehouses.QueryHandlers
                 }
             }
 
+            stock.FreeSpace = stock.MaxSize - stock.CurrentStock.Sum(x => x.Amount * x.Product.UnitSize);
+
             return Task.FromResult(stock);
         }
 
