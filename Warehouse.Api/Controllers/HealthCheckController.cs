@@ -4,7 +4,7 @@ using System.Web.Http.Description;
 
 namespace Warehouse.Api.Controllers
 {
-    [RoutePrefix("healthcheck")]
+    [RoutePrefix("api/healthcheck")]
     public class HealthCheckController : ApiController
     {
         [HttpGet] 

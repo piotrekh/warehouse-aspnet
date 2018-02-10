@@ -10,7 +10,7 @@ using Warehouse.Domain.Warehouses.Queries;
 
 namespace Warehouse.Api.Controllers
 {
-    [RoutePrefix("warehouses")]
+    [RoutePrefix("api/warehouses")]
     public class WarehousesController : ApiController
     {
         private readonly IMediator _mediator;
