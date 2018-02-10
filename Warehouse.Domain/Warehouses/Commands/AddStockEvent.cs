@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using System;
 
 namespace Warehouse.Domain.Warehouses.Commands
@@ -13,6 +14,7 @@ namespace Warehouse.Domain.Warehouses.Commands
 
         public int ProductId { get; set; }
 
+        [JsonIgnore]
         public int WarehouseId { get; set; }
     }
 }
