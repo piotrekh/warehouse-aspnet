@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Common;
+using System.Data.Entity;
 using Warehouse.DataAccess.EFHelpers;
 using Warehouse.DataAccess.Entities;
 using Warehouse.DataAccess.EntitiesConfig;
@@ -20,6 +21,10 @@ namespace Warehouse.DataAccess
         public DbSet<Entities.Warehouse> Warehouses { get; set; }
 
         public WarehouseDbContext() :base("WarehouseDb")
+        {
+        }
+
+        public WarehouseDbContext(DbConnection connection) : base(connection, true)
         {
         }
 
