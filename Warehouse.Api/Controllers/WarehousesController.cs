@@ -64,6 +64,10 @@ namespace Warehouse.Api.Controllers
             {
                 return BadRequest("Cannot export stock");
             }
+            catch(CannotImportStockException)
+            {
+                return BadRequest("Cannot import stock");
+            }
         }
     }
 }

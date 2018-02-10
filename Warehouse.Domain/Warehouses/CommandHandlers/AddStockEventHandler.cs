@@ -31,17 +31,23 @@ namespace Warehouse.Domain.Warehouses.CommandHandlers
         
         public async Task Handle(AddStockEvent message, CancellationToken cancellationToken)
         {
-            //TODO: check if we can export this amount of product
-            if (message.EventType == EventTypes.Export)
+            //check if we can export this amount of product or if we have space for import
+            var stockForDate = await _mediator.Send(new GetWarehouseStock()
             {
-                var stockForDate = await _mediator.Send(new GetWarehouseStock()
-                {
-                    WarehouseId = message.WarehouseId,
-                    CheckDate = message.EventDate
-                });
+                WarehouseId = message.WarehouseId,
+                CheckDate = message.EventDate
+            });
+            if (message.EventType == EventTypes.Export)
+            {               
                 var product = stockForDate.CurrentStock.SingleOrDefault(x => x.Product.Id == message.ProductId);
                 if (product == null || product.Amount < message.ProductAmount)
                     throw new CannotExportStockException();
+            }
+            else if(message.EventType == EventTypes.Import)
+            {
+                var productUnitSize = _dbContext.Products.SingleOrDefault(x => x.Id == message.ProductId).UnitSize;
+                if (stockForDate.FreeSpace < productUnitSize * message.ProductAmount)
+                    throw new CannotImportStockException();
             }
 
             var entity = _mapper.Map<DataAccess.Entities.StockEvent>(message);
