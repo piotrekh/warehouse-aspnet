@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace Warehouse.Domain.Warehouses.QueryHandlers
         public Task<ItemsResult<StockEvent>> Handle(GetWarehouseStockEvents request, CancellationToken cancellationToken)
         {
             var entities = _dbContext.StockEvents.Where(x => x.WarehouseId == request.WarehouseId)
+                .Include(x => x.Product)
                 .OrderByDescending(x => x.EventDate)
                 .ToList();
             var stockEvents = _mapper.Map<List<StockEvent>>(entities);

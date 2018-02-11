@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Warehouse.Api.App_Start
 {
@@ -7,6 +8,8 @@ namespace Warehouse.Api.App_Start
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+
             config.Routes.MapHttpRoute(
                 name: "DefaultRoute",
                 routeTemplate: "api/{controller}/{id}",
