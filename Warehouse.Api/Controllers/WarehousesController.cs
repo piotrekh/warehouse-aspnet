@@ -34,7 +34,7 @@ namespace Warehouse.Api.Controllers
             var query = new GetWarehouseStock()
             {
                 WarehouseId = id,
-                CheckDate = DateTime.UtcNow
+                CheckDate = DateTime.Now //in proper, full implementation this should be utc
             };
             return await _mediator.Send(query);
         }
