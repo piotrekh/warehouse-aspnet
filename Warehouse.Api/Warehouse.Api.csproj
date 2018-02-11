@@ -150,6 +150,7 @@
     <Compile Include="App_Start\WarehouseDependencies.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\WarehousesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
